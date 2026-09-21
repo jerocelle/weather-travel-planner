@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_forecast_daily
+    description: >
+      One row per trip/city/forecast_date/fetch. Types cast, units standardized
+      to Celsius/mm/km-h, and `days_out` computed for use in the forecast
+      drift snapshot.
+    columns:
+      - name: trip_id
+        data_tests:
+          - not_null
+      - name: forecast_date
+        data_tests:
+          - not_null
+      - name: fetched_at
+        data_tests:
+          - not_null
+      - name: days_out
+        description: Days between fetch date and the forecasted date (0 = fetched same-day).
+        data_tests:
+          - not_null
+      - name: weather_code
+        description: WMO weather interpretation code returned by Open-Meteo.
+        data_tests:
+          - accepted_values:
+              values: [0, 1, 2, 3, 45, 48, 51, 53, 55, 56, 57, 61, 63, 65, 66, 67,
+                       71, 73, 75, 77, 80, 81, 82, 85, 86, 95, 96, 99]

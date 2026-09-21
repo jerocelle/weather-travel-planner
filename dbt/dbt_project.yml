@@ -1,0 +1,38 @@
+name: 'weather_travel_planner'
+version: '1.0.0'
+config-version: 2
+
+profile: 'weather_travel_planner'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  weather_travel_planner:
+    +column_types:
+      lat: DOUBLE
+      lon: DOUBLE
+      start_date: DATE
+      end_date: DATE
+
+models:
+  weather_travel_planner:
+    staging:
+      +materialized: view
+      +schema: staging
+    marts:
+      +materialized: table
+      +schema: marts
+
+snapshots:
+  weather_travel_planner:
+    +target_schema: snapshots

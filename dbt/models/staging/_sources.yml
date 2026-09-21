@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Landed forecast data. In DuckDB this is the `raw` schema in the warehouse
+      file; in BigQuery this is the `raw` dataset loaded from GCS.
+    tables:
+      - name: forecast_daily
+        description: One row per trip/city per forecast date per fetch run.
+        loaded_at_field: fetched_at
+        freshness:
+          warn_after: {count: 26, period: hour}
+          error_after: {count: 50, period: hour}
+        columns:
+          - name: trip_id
+            description: Foreign key to dim_trips.trip_id.
+            data_tests:
+              - not_null
+          - name: forecast_date
+            description: The calendar date this forecast row applies to.
+            data_tests:
+              - not_null
+          - name: fetched_at
+            description: UTC timestamp when this forecast was pulled from the API.
+            data_tests:
+              - not_null
+          - name: temperature_2m_max
+            description: Max daily temperature in Celsius.
+          - name: temperature_2m_min
+            description: Min daily temperature in Celsius.
+          - name: precipitation_sum
+            description: Total daily precipitation in mm.
+          - name: precipitation_probability_max
+            description: Max daily precipitation probability, percent (0-100).
+          - name: windspeed_10m_max
+            description: Max daily windspeed at 10m, km/h.
+          - name: weathercode
+            description: WMO weather interpretation code.

@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: dim_trips
+    description: One row per trip (seeded and hand-maintained in seeds/trips.csv).
+    columns:
+      - name: trip_id
+        data_tests:
+          - unique
+          - not_null
+      - name: city
+        data_tests:
+          - not_null
+      - name: start_date
+        data_tests:
+          - not_null
+      - name: end_date
+        data_tests:
+          - not_null
+
+  - name: fct_trip_daily_forecast
+    description: Forecast rows joined to their trip's date window.
+    columns:
+      - name: trip_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_trips')
+              field: trip_id
+      - name: forecast_date
+        data_tests:
+          - not_null
+
+  - name: mart_trip_summary
+    description: >
+      One row per trip, summarizing the most recently fetched forecast for
+      each day of the trip: average temps, rain probability, and a
+      pack-an-umbrella flag.
+    columns:
+      - name: trip_id
+        data_tests:
+          - unique
+          - not_null
+      - name: pack_an_umbrella
+        data_tests:
+          - not_null
+
+exposures:
+  - name: trip_summary_dashboard
+    label: Trip Summary Dashboard
+    type: dashboard
+    maturity: medium
+    url: https://example.com/dashboards/weather-travel-planner
+    description: >
+      Per-trip weather outlook (avg temps, rain odds, pack-an-umbrella flag)
+      used to decide what to pack before each trip.
+    depends_on:
+      - ref('mart_trip_summary')
+    owner:
+      name: Jerocelle Gingo
+      email: jerocellegingo@gmail.com

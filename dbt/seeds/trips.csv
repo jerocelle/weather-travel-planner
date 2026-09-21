@@ -1,0 +1,5 @@
+trip_id,city,country,lat,lon,start_date,end_date
+taipei_2026_11,Taipei,Taiwan,25.0330,121.5654,2026-11-14,2026-11-19
+new_taipei_2026_11,New Taipei,Taiwan,25.0128,121.4625,2026-11-14,2026-11-19
+cavite_2026_11,Cavite,Philippines,14.4791,120.8970,2026-11-19,2026-11-23
+cebu_2026_11,Cebu,Philippines,10.3157,123.8854,2026-11-23,2026-12-04

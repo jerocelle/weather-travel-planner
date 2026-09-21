@@ -1,0 +1,21 @@
+weather_travel_planner:
+  target: dev
+  outputs:
+
+    # Local: DuckDB file on disk. Assumes dbt is invoked from the dbt/ directory
+    # (`cd dbt && dbt run`), matching the DAG and Docker Compose setup.
+    dev:
+      type: duckdb
+      path: '../data/warehouse/warehouse.duckdb'
+      threads: 4
+
+    # GCP: swap target with `dbt run --target prod`. No model code changes needed —
+    # sources/refs are warehouse-agnostic.
+    prod:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: weather_travel_planner
+      keyfile: "{{ env_var('GCP_KEYFILE_PATH') }}"
+      location: US
+      threads: 4
