@@ -4,10 +4,15 @@ weather_travel_planner:
 
     # Local: DuckDB file on disk. Assumes dbt is invoked from the dbt/ directory
     # (`cd dbt && dbt run`), matching the DAG and Docker Compose setup.
+    #
+    # threads pinned to 1: dbt-duckdb's Python bindings have a known GIL-related
+    # crash (Fatal Python error: PyEval_SaveThread) when multiple threads hit
+    # the same DuckDB connection concurrently. Not worth the risk for a
+    # dataset this small.
     dev:
       type: duckdb
       path: '../data/warehouse/warehouse.duckdb'
-      threads: 4
+      threads: 1
 
     # GCP: swap target with `dbt run --target prod`. No model code changes needed —
     # sources/refs are warehouse-agnostic.
