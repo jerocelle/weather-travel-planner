@@ -10,10 +10,10 @@ Compose), with a config-only path to GCP (BigQuery + Composer/GCE).
 
 | Trip | City | Country | Dates |
 |---|---|---|---|
-| taipei_2026_11 | Taipei | Taiwan | 2026-11-14 – 2026-11-19 |
-| new_taipei_2026_11 | New Taipei | Taiwan | 2026-11-14 – 2026-11-19 |
-| cavite_2026_11 | Cavite | Philippines | 2026-11-19 – 2026-11-23 |
-| cebu_2026_11 | Cebu | Philippines | 2026-11-23 – 2026-12-04 |
+| taipei_2026_09 | Taipei | Taiwan | 2026-09-19 – 2026-09-24 |
+| new_taipei_2026_09 | New Taipei | Taiwan | 2026-09-19 – 2026-09-24 |
+| cavite_2026_09 | Cavite | Philippines | 2026-09-24 – 2026-09-28 |
+| cebu_2026_09 | Cebu | Philippines | 2026-09-28 – 2026-10-09 |
 
 Add trips by editing `ingestion/config/trips.yaml` **and** `dbt/seeds/trips.csv`
 (kept in sync by hand — `ingestion/geocode.py <city> --country <country>` will

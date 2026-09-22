@@ -1,32 +1,32 @@
 trips:
-  - trip_id: taipei_2026_11
+  - trip_id: taipei_2026_09
     city: Taipei
     country: Taiwan
     lat: 25.0330
     lon: 121.5654
-    start_date: "2026-11-14"
-    end_date: "2026-11-19"
+    start_date: "2026-09-19"
+    end_date: "2026-09-24"
 
-  - trip_id: new_taipei_2026_11
+  - trip_id: new_taipei_2026_09
     city: New Taipei
     country: Taiwan
     lat: 25.0128
     lon: 121.4625
-    start_date: "2026-11-14"
-    end_date: "2026-11-19"
+    start_date: "2026-09-19"
+    end_date: "2026-09-24"
 
-  - trip_id: cavite_2026_11
+  - trip_id: cavite_2026_09
     city: Cavite
     country: Philippines
     lat: 14.4791
     lon: 120.8970
-    start_date: "2026-11-19"
-    end_date: "2026-11-23"
+    start_date: "2026-09-24"
+    end_date: "2026-09-28"
 
-  - trip_id: cebu_2026_11
+  - trip_id: cebu_2026_09
     city: Cebu
     country: Philippines
     lat: 10.3157
     lon: 123.8854
-    start_date: "2026-11-23"
-    end_date: "2026-12-04"
+    start_date: "2026-09-28"
+    end_date: "2026-10-09"
