@@ -59,11 +59,16 @@ with DAG(
     fetch_forecast = PythonOperator(
         task_id="fetch_forecast",
         python_callable=fetch_forecast_run,
+        # fetch_forecast_run returns a list[Path], which isn't JSON-serializable
+        # for XCom, and load_to_warehouse doesn't need it anyway (it globs the
+        # raw dir itself).
+        do_xcom_push=False,
     )
 
     load_to_warehouse = PythonOperator(
         task_id="load_to_warehouse",
         python_callable=load_to_warehouse_run,
+        do_xcom_push=False,
     )
 
     dbt_run = BashOperator(
